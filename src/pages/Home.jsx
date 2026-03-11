@@ -270,18 +270,15 @@ export default function Home() {
                 <div className="hero-slides" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {slides.map((slide, i) => (
                         <div className="hero-slide" key={i}>
-                            <picture className="hero-slide-bg">
-                                <source type="image/avif" srcSet={buildSources(slide.imageBase).avif} />
-                                <source type="image/webp" srcSet={buildSources(slide.imageBase).webp} />
-                                <img
-                                    src={buildSources(slide.imageBase).png}
-                                    alt=""
-                                    aria-hidden="true"
-                                    loading={i === 0 ? 'eager' : 'lazy'}
-                                    decoding="async"
-                                    fetchPriority={i === 0 ? 'high' : 'low'}
-                                />
-                            </picture>
+                            <img
+                                className="hero-slide-bg"
+                                src={buildSources(slide.imageBase).png}
+                                alt=""
+                                aria-hidden="true"
+                                loading={i === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
+                                fetchPriority={i === 0 ? 'high' : 'low'}
+                            />
                             <div className="hero-slide-overlay" style={{ background: 'rgba(0,0,0,0.6)' }} />
                             <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
                                 <div className="hero-content">

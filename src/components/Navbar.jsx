@@ -41,7 +41,7 @@ export default function Navbar() {
                         <img
                             src="/logo.png"
                             alt="CenterSIM Logo"
-                            style={{ height: '60px' }}
+                            style={{ height: '70px' }}
                             loading="eager"
                             decoding="async"
                             fetchPriority="high"
@@ -55,11 +55,11 @@ export default function Navbar() {
                     <a href="#fornecedores" className={isActive('#fornecedores')} onClick={() => setMenuOpen(false)}>Fornecedores</a>
                     <a href="#parceiros" className={isActive('#parceiros')} onClick={() => setMenuOpen(false)}>Parceiros</a>
                     <a href="#contato" className={isActive('#contato')} onClick={() => setMenuOpen(false)}>Contato</a>
-                    <a href="/ja-sou-parceiro" className="btn btn-outline-primary d-desktop-none" onClick={() => setMenuOpen(false)}>Área do parceiro</a>
+                    <a href="/ja-sou-parceiro" className="btn btn-green d-desktop-none" onClick={() => setMenuOpen(false)}>Área do parceiro</a>
                 </div>
 
                 <div className="navbar-actions">
-                    <a href="/ja-sou-parceiro" className="btn btn-outline-primary d-mobile-none">Área do parceiro</a>
+                    <a href="/ja-sou-parceiro" className="btn btn-green d-mobile-none">Área do parceiro</a>
                     <button className="navbar-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
                         <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`} style={{ color: scrolled ? 'var(--dark)' : '#fff' }} />
                     </button>
