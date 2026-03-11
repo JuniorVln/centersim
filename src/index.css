@@ -270,19 +270,16 @@ h4 {
 /* ===== HERO SLIDER ===== */
 .hero {
   position: relative;
-  height: 80vh;
+  height: 100vh;
   min-height: 600px;
   overflow: hidden;
 }
 
 .scroll-indicator {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--white);
-  font-size: 24px;
-  animation: bounce 2s infinite;
   z-index: 10;
   cursor: pointer;
   opacity: 0.8;
@@ -293,22 +290,55 @@ h4 {
   opacity: 1;
 }
 
-@keyframes bounce {
+.scroll-mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
 
-  0%,
-  20%,
-  50%,
-  80%,
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 4px;
+  animation: scrollWheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
   100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
     transform: translateY(0) translateX(-50%);
   }
-
   40% {
     transform: translateY(-15px) translateX(-50%);
   }
-
   60% {
     transform: translateY(-7px) translateX(-50%);
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0) translateX(-50%);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(10px) translateX(-50%);
+    opacity: 1;
   }
 }
 
@@ -355,16 +385,15 @@ h4 {
 }
 
 .hero-label {
-  display: inline-block;
-  background: var(--secondary);
-  color: var(--white);
-  padding: 6px 18px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  display: block;
+  background: none;
+  color: var(--secondary);
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
 .hero-content h1 {
@@ -383,27 +412,27 @@ h4 {
 
 .hero-dots {
   position: absolute;
+  right: 40px;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   gap: 10px;
   z-index: 5;
 }
 
 .hero-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  width: 4px;
+  height: 20px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.35);
   border: none;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .hero-dot.active {
-  background: var(--secondary);
-  transform: scale(1.2);
+  background: var(--white);
+  height: 36px;
 }
 
 .hero-arrows {

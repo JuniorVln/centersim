@@ -306,8 +306,10 @@ export default function Home() {
                     ))}
                 </div>
 
-                <a href="#quem-somos" className="scroll-indicator fade-in" style={{ animationDelay: '0.8s' }} aria-label="Rolar para baixo">
-                    <i className="fas fa-chevron-down"></i>
+                <a href="#quem-somos" className="scroll-indicator" aria-label="Rolar para baixo">
+                    <div className="scroll-mouse">
+                        <div className="scroll-wheel"></div>
+                    </div>
                 </a>
             </section>
 
