@@ -356,7 +356,7 @@ h4 {
 
 .hero-label {
   display: inline-block;
-  background: var(--primary);
+  background: var(--secondary);
   color: var(--white);
   padding: 6px 18px;
   border-radius: 50px;
@@ -402,7 +402,7 @@ h4 {
 }
 
 .hero-dot.active {
-  background: var(--primary);
+  background: var(--secondary);
   transform: scale(1.2);
 }
 
@@ -435,8 +435,8 @@ h4 {
 }
 
 .hero-arrow:hover {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--secondary);
+  border-color: var(--secondary);
 }
 
 /* ===== SECTION STYLES ===== */
@@ -1737,8 +1737,8 @@ h4 {
 }
 
 .qs-title span {
-  color: var(--primary);
-  background: rgba(247, 101, 16, 0.1);
+  color: var(--secondary);
+  background: rgba(76, 175, 80, 0.1);
   padding: 2px 10px;
   margin-left: -10px;
   border-radius: 8px;
@@ -1782,13 +1782,13 @@ h4 {
 }
 
 .qs-tab:hover {
-  border-color: rgba(247, 101, 16, 0.3);
-  box-shadow: 0 6px 15px rgba(247, 101, 16, 0.05);
+  border-color: rgba(76, 175, 80, 0.3);
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.05);
 }
 
 .qs-tab.active {
-  background: rgba(247, 101, 16, 0.05);
-  border-color: var(--primary);
+  background: rgba(76, 175, 80, 0.05);
+  border-color: var(--secondary);
 }
 
 .qs-tab-title {
@@ -1798,7 +1798,7 @@ h4 {
 }
 
 .qs-tab-title span {
-  color: var(--primary);
+  color: var(--secondary);
   font-weight: 800;
 }
 
@@ -1806,7 +1806,7 @@ h4 {
   opacity: 0;
   transform: translateX(-10px);
   transition: all 0.3s ease;
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .qs-tab.active .qs-tab-arrow,
@@ -1856,7 +1856,7 @@ h4 {
 }
 
 .qs-card.highlight {
-  background: var(--primary);
+  background: var(--secondary);
   color: var(--white);
   border: none;
   text-align: center;
@@ -1885,10 +1885,12 @@ h4 {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--white);
-  width: 100px;
+  width: 130px;
   flex-shrink: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .qs-stat-bar {
@@ -1993,8 +1995,8 @@ h4 {
 }
 
 .supplier-brand-box {
-  width: 180px;
-  height: 100px;
+  width: 240px;
+  height: 130px;
   background: var(--white);
   border-radius: 12px;
   display: flex;
@@ -2011,12 +2013,12 @@ h4 {
 .supplier-brand-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border-color: var(--primary);
+  border-color: var(--secondary);
 }
 
 .supplier-brand-box img {
-  max-width: 140%;
-  max-height: 140%;
+  max-width: 160%;
+  max-height: 160%;
   object-fit: contain;
 }
 
@@ -2119,7 +2121,7 @@ h4 {
 
 .contact-info-block {
   flex: 1;
-  background: var(--primary);
+  background: var(--secondary);
   padding: 60px 45px;
   border-radius: 30px;
   color: var(--white);
@@ -2292,7 +2294,7 @@ h4 {
 
 .marquee-text-col .section-label {
   display: block;
-  color: var(--primary);
+  color: var(--secondary);
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 15px;
@@ -2360,7 +2362,7 @@ h4 {
 }
 
 .mini-quote {
-  color: var(--primary);
+  color: var(--secondary);
   opacity: 0.2;
   font-size: 1.5rem;
   margin-bottom: 15px;

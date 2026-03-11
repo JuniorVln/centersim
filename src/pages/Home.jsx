@@ -285,7 +285,7 @@ export default function Home() {
                                     <span className="hero-label">{slide.label}</span>
                                     <h1>{slide.title}</h1>
                                     <p>{slide.description}</p>
-                                    <a href={slide.link} className="btn btn-primary">{slide.btn}</a>
+                                    <a href={slide.link} className="btn btn-green">{slide.btn}</a>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +316,7 @@ export default function Home() {
                 <div className="container">
                     <div className="qs-header">
                         <div className="qs-header-left">
-                            <span className="section-subtitle" style={{ textAlign: 'left', marginBottom: '10px', color: 'var(--primary)' }}>Quem Somos</span>
+                            <span className="section-subtitle" style={{ textAlign: 'left', marginBottom: '10px', color: 'var(--secondary)' }}>Quem Somos</span>
                             <h2 className="qs-title">Como surgiu a <br /><span>Rede CenterSIM</span></h2>
                         </div>
                         <div className="qs-header-right">
@@ -422,7 +422,7 @@ export default function Home() {
 
                 <div className="container">
                     <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                        <a href="#parceiros" className="btn btn-primary">Quero fazer parte</a>
+                        <a href="#parceiros" className="btn btn-green">Quero fazer parte</a>
                     </div>
                 </div>
                 <style>{`
@@ -509,7 +509,7 @@ export default function Home() {
                                     <textarea rows="2" placeholder="Sua mensagem..."></textarea>
                                 </div>
                                 <div className="form-footer">
-                                    <button type="submit" className="btn btn-primary">Enviar solicitação</button>
+                                    <button type="submit" className="btn btn-green">Enviar solicitação</button>
                                 </div>
                             </form>
                         </div>
@@ -530,7 +530,7 @@ export default function Home() {
                                 Descubra como estamos transformando o setor da construção.
                             </p>
                             <div className="marquee-cta">
-                                <a href="#parceiros" className="btn btn-primary">Seja um parceiro</a>
+                                <a href="#parceiros" className="btn btn-green">Seja um parceiro</a>
                             </div>
                         </div>
 
@@ -630,7 +630,7 @@ export default function Home() {
                     </div>
 
                     <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="btn btn-outline-dark">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="btn btn-green">
                             <i className="fab fa-instagram" style={{ marginRight: '8px' }}></i>
                             Siga nosso Instagram
                         </a>
