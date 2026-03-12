@@ -43,7 +43,7 @@ const servicos = [
     {
         imageBase: '/servico_3',
         title: 'MARKETING',
-        desc: 'Maior visibilidade e aumento das vendas.',
+        desc: 'Maior visibilidade e aumento\u00A0das\u00A0vendas.',
         num: '03'
     },
     {
@@ -145,7 +145,6 @@ const faqs = [
 
 export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [currentTestimonial, setCurrentTestimonial] = useState(0)
     const [openFaq, setOpenFaq] = useState(null)
     const [activeQuemSomosTab, setActiveQuemSomosTab] = useState(0)
     const slideInterval = useRef(null)
@@ -163,13 +162,6 @@ export default function Home() {
             setCurrentSlide(prev => (prev + 1) % slides.length)
         }, 6000)
         return () => clearInterval(slideInterval.current)
-    }, [])
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTestimonial(prev => (prev + 1) % (testimonials.length / 2))
-        }, 6000)
-        return () => clearInterval(interval)
     }, [])
 
     const goToSlide = (i) => {
@@ -318,7 +310,7 @@ export default function Home() {
                 <div className="container">
                     <div className="qs-header">
                         <div className="qs-header-left">
-                            <span className="section-subtitle" style={{ textAlign: 'left', marginBottom: '10px', color: 'var(--secondary)' }}>Quem Somos</span>
+                            <span className="section-subtitle" style={{ textAlign: 'left', marginBottom: '10px', color: 'var(--primary)' }}>Quem Somos</span>
                             <h2 className="qs-title">Como surgiu a <br /><span>Rede CenterSIM</span></h2>
                         </div>
                         <div className="qs-header-right">
@@ -382,7 +374,6 @@ export default function Home() {
                         {servicos.map((item, i) => (
                             <div key={i} className="service-new-card">
                                 <div className="service-new-box">
-                                    <span className="service-num">{item.num}</span>
                                     <picture>
                                         <source type="image/avif" srcSet={buildSources(item.imageBase).avif} />
                                         <source type="image/webp" srcSet={buildSources(item.imageBase).webp} />
@@ -703,6 +694,6 @@ export default function Home() {
                 </div>
             </section>
 
-        </main >
+        </main>
     )
 }

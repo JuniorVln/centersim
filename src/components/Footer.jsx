@@ -1,5 +1,3 @@
-
-
 export default function Footer() {
     return (
         <footer className="footer">
@@ -8,9 +6,9 @@ export default function Footer() {
                     <div>
                         <a href="#home" className="footer-logo">
                             <img
-                                src="/logo.png"
+                                src="/logo-negativo.png"
                                 alt="CenterSIM Logo"
-                                style={{ height: '60px', marginBottom: '10px', filter: 'brightness(0) invert(1)' }}
+                                style={{ height: '60px', marginBottom: '10px' }}
                                 loading="lazy"
                                 decoding="async"
                             />

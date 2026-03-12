@@ -110,7 +110,7 @@ export default function Contato() {
                                 </div>
                                 <div>
                                     <h4>E-mail</h4>
-                                    <p>contato@centersim.com.br</p>
+                                    <p>centersim@simnegocios.com.br</p>
                                 </div>
                             </div>
                             <div className="contact-info-card">

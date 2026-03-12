@@ -64,7 +64,6 @@ export default function QuemSomos() {
             <section className="section section-gray">
                 <div className="container">
                     <h2 className="section-title">Missão, visão e valores!</h2>
-                    <p className="section-subtitle" />
                     <div className="mvv-grid">
                         <div className="mvv-card">
                             <i className="fas fa-bullseye" />

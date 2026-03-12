@@ -140,7 +140,6 @@ export default function SejaParceiro() {
             <section className="section section-gray">
                 <div className="container">
                     <h2 className="section-title">Porque a CenterSIM é a melhor escolha</h2>
-                    <p className="section-subtitle" />
                     <ul className="check-list" style={{ maxWidth: '800px', margin: '0 auto' }}>
                         <li><i className="fas fa-check-circle" /> Negociações exclusivas e fornecedores homologados que aumentam a competitividade e a rentabilidade</li>
                         <li><i className="fas fa-check-circle" /> Suporte comercial e estratégico para impulsionar resultados reais nas lojas</li>
