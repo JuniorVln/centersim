@@ -56,6 +56,15 @@ export default function Footer() {
 
                 <div className="footer-bottom">
                     <span>©2026 CenterSIM. Todos os direitos reservados.</span>
+                    <a href="https://agenciamantra.com.br/" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="/powered_by_mantra.webp"
+                            alt="Powered by Mantra"
+                            style={{ height: '20px', opacity: 0.7, transition: 'opacity 0.3s' }}
+                            onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                            onMouseLeave={(e) => e.currentTarget.style.opacity = 0.7}
+                        />
+                    </a>
                     <div className="footer-bottom-links">
                         <a href="#">Política de privacidade</a>
                         <a href="#">Termos de uso</a>

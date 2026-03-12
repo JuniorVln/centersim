@@ -220,7 +220,7 @@ export default function Home() {
         {
             id: 'presenca',
             title: '04 Presença Nacional',
-            imageBase: '/mapa_brasil_regions',
+            imageBase: '/mapa_3d',
             content: (
                 <div className="qs-content-inner" style={{ background: 'transparent', padding: 0 }}>
                     <div className="qs-stat-list">
