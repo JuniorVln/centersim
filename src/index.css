@@ -2099,11 +2099,28 @@ h4 {
   padding: 40px 0;
 }
 
+.suppliers-draggable {
+  overflow-x: auto;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.suppliers-draggable::-webkit-scrollbar {
+  display: none;
+}
+
 .suppliers-track {
   display: flex;
   gap: 30px;
   animation: scroll 150s linear infinite;
   width: max-content;
+}
+
+.suppliers-track-static {
+  animation: none;
+  padding: 0 30px;
 }
 
 .supplier-brand-box {
@@ -2359,6 +2376,12 @@ h4 {
   border-radius: 20px;
 }
 
+.form-contact-error {
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin: -5px 0 5px;
+}
+
 .form-footer {
   margin-top: 5px;
 }
@@ -2465,6 +2488,10 @@ h4 {
 
 .column-down .marquee-inner {
   animation: scrollDown 40s linear infinite;
+}
+
+.marquee-hover-pause:hover .marquee-inner {
+  animation-play-state: paused;
 }
 
 .testimonial-card-mini {

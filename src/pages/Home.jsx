@@ -147,6 +147,9 @@ export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [openFaq, setOpenFaq] = useState(null)
     const [activeQuemSomosTab, setActiveQuemSomosTab] = useState(0)
+    const [formEmail, setFormEmail] = useState('')
+    const [formTel, setFormTel] = useState('')
+    const [contactError, setContactError] = useState('')
     const slideInterval = useRef(null)
     const supplierLogoCount = 30
     const supplierLogos = Array.from({ length: supplierLogoCount }, (_, i) => i + 1)
@@ -175,8 +178,66 @@ export default function Home() {
     const prevSlide = () => goToSlide((currentSlide - 1 + slides.length) % slides.length)
     const nextSlide = () => goToSlide((currentSlide + 1) % slides.length)
 
+    // Auto-scroll + drag-to-scroll for suppliers carousel
+    const suppliersRef = useRef(null)
+    const draggingRef = useRef(false)
+    const startXRef = useRef(0)
+    const scrollLeftRef = useRef(0)
+    const autoScrollRef = useRef(null)
+    const userInteractingRef = useRef(false)
+
+    useEffect(() => {
+        const el = suppliersRef.current
+        if (!el) return
+
+        const step = () => {
+            if (!userInteractingRef.current && el) {
+                el.scrollLeft += 1
+                // Loop: when reaching the halfway point (duplicated logos), reset
+                if (el.scrollLeft >= el.scrollWidth / 2) {
+                    el.scrollLeft = 0
+                }
+            }
+            autoScrollRef.current = requestAnimationFrame(step)
+        }
+        autoScrollRef.current = requestAnimationFrame(step)
+        return () => cancelAnimationFrame(autoScrollRef.current)
+    }, [])
+
+    const handleMouseDown = (e) => {
+        const el = suppliersRef.current
+        draggingRef.current = true
+        userInteractingRef.current = true
+        startXRef.current = e.pageX - el.offsetLeft
+        scrollLeftRef.current = el.scrollLeft
+        el.style.cursor = 'grabbing'
+    }
+
+    const handleMouseUp = () => {
+        draggingRef.current = false
+        if (suppliersRef.current) suppliersRef.current.style.cursor = 'grab'
+        setTimeout(() => { userInteractingRef.current = false }, 1000)
+    }
+
+    const handleMouseMove = (e) => {
+        if (!draggingRef.current) return
+        e.preventDefault()
+        const el = suppliersRef.current
+        const x = e.pageX - el.offsetLeft
+        const walk = (x - startXRef.current) * 2
+        el.scrollLeft = scrollLeftRef.current - walk
+    }
+
+    const handleTouchStart = () => { userInteractingRef.current = true }
+    const handleTouchEnd = () => { setTimeout(() => { userInteractingRef.current = false }, 1000) }
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (!formEmail && !formTel) {
+            setContactError('Preencha pelo menos o e-mail ou o telefone.')
+            return
+        }
+        setContactError('')
         alert('Solicitação enviada com sucesso! Em breve nossa equipe entrará em contato.')
     }
 
@@ -399,14 +460,22 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className="suppliers-carousel">
-                    <div className="suppliers-track">
-                        {/* Supplier logos */}
+                <div
+                    className="suppliers-carousel suppliers-draggable"
+                    ref={suppliersRef}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onMouseMove={handleMouseMove}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    <div className="suppliers-track suppliers-track-static">
                         {[...supplierLogos, ...supplierLogos].map((num, idx) => {
                             const base = `/fornecedores/${num}`
                             return (
                                 <div key={`${num}-${idx}`} className="supplier-brand-box">
-                                    <img src={`${base}.png`} alt={`Fornecedor ${num}`} loading="lazy" decoding="async" />
+                                    <img src={`${base}.png`} alt={`Fornecedor ${num}`} loading="lazy" decoding="async" draggable="false" />
                                 </div>
                             )
                         })}
@@ -418,12 +487,6 @@ export default function Home() {
                         <a href="#parceiros" className="btn btn-green">Quero fazer parte</a>
                     </div>
                 </div>
-                <style>{`
-                    @keyframes scroll {
-                        0% { transform: translateX(0); }
-                        100% { transform: translateX(calc(-180px * ${supplierLogoCount} - 30px * ${supplierLogoCount})); }
-                    }
-                `}</style>
             </section>
 
             {/* Parceiros Lojistas (Pilares e Form) */}
@@ -473,14 +536,15 @@ export default function Home() {
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>E-mail *</label>
-                                        <input type="email" required placeholder="seu@email.com" />
+                                        <label>E-mail {!formTel ? '*' : ''}</label>
+                                        <input type="email" placeholder="seu@email.com" value={formEmail} onChange={(e) => { setFormEmail(e.target.value); setContactError('') }} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Telefone *</label>
-                                        <input type="tel" required placeholder="(00) 00000-0000" />
+                                        <label>Telefone {!formEmail ? '*' : ''}</label>
+                                        <input type="tel" placeholder="(00) 00000-0000" value={formTel} onChange={(e) => { setFormTel(e.target.value); setContactError('') }} />
                                     </div>
                                 </div>
+                                {contactError && <p className="form-contact-error">{contactError}</p>}
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label>Cidade / Estado *</label>
@@ -528,7 +592,7 @@ export default function Home() {
                         </div>
 
                         {/* Column 2: Marquee Grid */}
-                        <div className="marquee-visual-col">
+                        <div className="marquee-visual-col marquee-hover-pause">
                             <div className="marquee-column column-up">
                                 <div className="marquee-inner">
                                     {[...testimonials, ...testimonials].map((t, i) => (
