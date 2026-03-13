@@ -75,40 +75,39 @@ const pilares = [
 
 const testimonials = [
     {
-        name: 'Carlos Oliveira',
-        store: 'Oliveira Materiais',
+        name: 'Ludgero Moreira',
+        store: 'LM Acabamentos',
+        quote: 'Ser CenterSIM é estar ativo e associativo no mercado matcon. É estar atualizado e buscar melhores e maiores oportunidades para se desenvolver e oferecer aos clientes sempre o melhor.',
+        location: 'Passa Quatro - MG',
+        photo: '/depoimentos/ludgero.jpeg'
+    },
+    {
+        name: 'Rubia',
+        store: 'Pedrisco',
+        quote: 'Em tempos de alta competitividade e grandes desafios a CenterSIM foi uma parceira importante para nossa empresa. Pois com o apoio da rede, juntamente com as trocas de experiências dos parceiros lojistas associados, unimos forças para buscar melhores oportunidades de crescimento.',
+        location: 'Ortigueira - PR',
+        photo: '/depoimentos/rubia.jpeg'
+    },
+    {
+        name: 'Kleyton',
+        store: 'Reformar Construções',
+        quote: 'A CenterSIM tem sido uma parceira fundamental na caminhada da ReforMAR. A confiança, o suporte e a proximidade no dia a dia nos dão segurança para crescer e tomar decisões com mais clareza. É uma rede que realmente fortalece o nosso negócio e nos faz sentir parte de algo maior.',
+        location: 'Iraquara - BA',
+        photo: '/depoimentos/kleyton.jpeg'
+    },
+    {
+        name: 'Ana Karina',
+        store: 'Armazém Mais',
         quote: 'Fazer parte da Rede CenterSIM é um marco na história da nossa empresa. É motivo de orgulho e responsabilidade. Agradeço pela confiança e pelas parcerias que fortalecem esse movimento. Seguimos juntos, construindo crescimento com propósito.',
-        location: 'Belo Horizonte - MG'
+        location: 'Candeias - BA',
+        photo: '/depoimentos/ana-karina.jpeg'
     },
     {
-        name: 'Mariana Santos',
-        store: 'Santo Lar Construções',
-        quote: 'A Rede CenterSIM possui elevada relevância estratégica para o nosso negócio. Ao longo de quase 10 anos de parceria, foi construída uma relação sólida de cooperação e confiança mútua, que assegura a presença efetiva da Rede em todos os níveis da nossa operação.',
-        location: 'Campinas - SP'
-    },
-    {
-        name: 'Ricardo Silva',
-        store: 'Silva & Filhos',
-        quote: 'Para nós, a Rede CenterSIM tem sido de extrema importância, não só pelas negociações com fornecedores de produtos, mas também na negociação com diversos fornecedores de serviços. Sempre trazendo as melhores opções e informações do mercado.',
-        location: 'Florianópolis - SC'
-    },
-    {
-        name: 'Jorge Almeida',
-        store: 'Almeida Construção',
-        quote: 'Somos parceiros da Rede CenterSIM há 10 anos. Decisão extremamente assertiva que nos fortalece a cada dia. A Rede nos traz total confiança e nos serve de relevante apoio para a nossa operação. Somos muito gratos pelo bom trabalho prestado.',
-        location: 'Cuiabá - MT'
-    },
-    {
-        name: 'Fernando Costa',
-        store: 'Costa Ferragens',
-        quote: 'Fazer parte da Rede CenterSIM é sentir que você não está sozinho na jornada. É ter apoio estratégico, troca real entre empresários e a segurança de caminhar ao lado de quem pensa no crescimento de forma estruturada.',
-        location: 'Ribeirão Preto - SP'
-    },
-    {
-        name: 'Beatriz Lima',
-        store: 'Lima Materiais Rio',
-        quote: 'A Rede CenterSIM é uma parceira importante para o nosso negócio. Sempre tivemos apoio, confiança e uma relação transparente, que contribui diretamente para o nosso crescimento.',
-        location: 'Rio de Janeiro - RJ'
+        name: 'Luhara Rios',
+        store: 'Casa das Madeiras',
+        quote: 'A CenterSIM é uma parceira estratégica para nós da Casa das Madeiras. Nossa relação é constituída por confiança e apoio constante, o que impulsiona nosso crescimento. Fazer parte da rede representa uma evolução contínua para nosso negócio.',
+        location: 'Mairi - BA',
+        photo: '/depoimentos/luhara.jpeg'
     }
 ]
 
@@ -606,9 +605,13 @@ export default function Home() {
                                                     <strong>{t.name}</strong>
                                                     <span>{t.store}</span>
                                                 </div>
-                                                <div className="mini-photo-placeholder">
-                                                    <i className="fas fa-user"></i>
-                                                </div>
+                                                {t.photo ? (
+                                                    <img src={t.photo} alt={t.name} className="mini-photo" />
+                                                ) : (
+                                                    <div className="mini-photo-placeholder">
+                                                        <i className="fas fa-user"></i>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
@@ -627,9 +630,13 @@ export default function Home() {
                                                     <strong>{t.name}</strong>
                                                     <span>{t.store}</span>
                                                 </div>
-                                                <div className="mini-photo-placeholder">
-                                                    <i className="fas fa-user"></i>
-                                                </div>
+                                                {t.photo ? (
+                                                    <img src={t.photo} alt={t.name} className="mini-photo" />
+                                                ) : (
+                                                    <div className="mini-photo-placeholder">
+                                                        <i className="fas fa-user"></i>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}
