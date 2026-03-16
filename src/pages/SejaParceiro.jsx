@@ -112,7 +112,7 @@ export default function SejaParceiro() {
             </div>
 
             {/* Stats */}
-            <section className="section section-dark">
+            <section className="section section-dark section-stats-compact">
                 <div className="container">
                     <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.7)' }}>Mais de 300 parcerias realizadas com lojistas e fornecedores.</p>
                     <div className="stats-grid">

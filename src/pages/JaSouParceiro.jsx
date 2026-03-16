@@ -85,65 +85,10 @@ export default function JaSouParceiro() {
                         </div>
 
                         <div className="partner-app-visual">
-                            <div className="phone-device">
-                                <div className="phone-frame">
-                                    <div className="phone-notch" />
-                                    <div className="phone-screen">
-                                        <div className="phone-status-bar">
-                                            <span>9:41</span>
-                                            <div className="phone-status-icons">
-                                                <i className="fas fa-signal" />
-                                                <i className="fas fa-wifi" />
-                                                <i className="fas fa-battery-full" />
-                                            </div>
-                                        </div>
-                                        <div className="phone-app-header">
-                                            <img src="/logo-branco.png" alt="CenterSIM" />
-                                        </div>
-                                        <div className="phone-app-content">
-                                            <p className="phone-greeting">Olá, Parceiro!</p>
-                                            <p className="phone-subgreeting">Bem-vindo ao seu painel</p>
-                                            <div className="phone-stats">
-                                                <div className="phone-stat">
-                                                    <span className="phone-stat-value">247</span>
-                                                    <span className="phone-stat-label">Vendas</span>
-                                                </div>
-                                                <div className="phone-stat">
-                                                    <span className="phone-stat-value">R$ 12k</span>
-                                                    <span className="phone-stat-label">Comissão</span>
-                                                </div>
-                                            </div>
-                                            <div className="phone-menu-grid">
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-chart-pie" />
-                                                    <span>Relatórios</span>
-                                                </div>
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-box-open" />
-                                                    <span>Estoque</span>
-                                                </div>
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-shopping-cart" />
-                                                    <span>Pedidos</span>
-                                                </div>
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-bullhorn" />
-                                                    <span>Campanhas</span>
-                                                </div>
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-user-check" />
-                                                    <span>Ativações</span>
-                                                </div>
-                                                <div className="phone-menu-item">
-                                                    <i className="fas fa-headset" />
-                                                    <span>Suporte</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="phone-glow" />
-                            </div>
+                            <img
+                                src="/assets/images/partner-mockup.png"
+                                alt="Mockup do aplicativo CenterSIM para parceiros"
+                            />
                         </div>
                     </div>
                 </div>
