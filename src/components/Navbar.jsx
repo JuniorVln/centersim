@@ -13,6 +13,29 @@ export default function Navbar() {
             setScrolled(window.scrollY > 50)
         }
 
+        // Intersection Observer for scrollspy
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Adjust margin to trigger active state earlier/later
+            threshold: 0
+        }
+
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveHash(`#${entry.target.id}`)
+                }
+            })
+        }
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions)
+        const sections = ['home', 'quem-somos', 'fornecedores', 'parceiros', 'contato']
+        
+        sections.forEach(id => {
+            const el = document.getElementById(id)
+            if (el) observer.observe(el)
+        })
+
         window.addEventListener('hashchange', handleHashChange)
         window.addEventListener('scroll', handleScroll)
         handleHashChange()
@@ -21,6 +44,7 @@ export default function Navbar() {
         return () => {
             window.removeEventListener('hashchange', handleHashChange)
             window.removeEventListener('scroll', handleScroll)
+            observer.disconnect()
         }
     }, [])
 
@@ -37,11 +61,11 @@ export default function Navbar() {
         <nav ref={navRef} className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container">
                 <div className="navbar-logo">
-                    <a href="#home">
+                    <a href="/">
                         <img
                             src="/logo-branco.png"
                             alt="CenterSIM Logo"
-                            style={{ height: '70px' }}
+                            style={{ height: '56px' }}
                             loading="eager"
                             decoding="async"
                             fetchPriority="high"

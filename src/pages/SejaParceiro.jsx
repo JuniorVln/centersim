@@ -41,27 +41,46 @@ const benefits = [
 
 const testimonials = [
     {
-        quote: 'Fazer parte da Rede CenterSIM é um marco na história da nossa empresa. É motivo de orgulho e responsabilidade. Seguimos juntos, construindo crescimento com propósito.',
-        location: 'Minas Gerais'
+        name: 'Ana Karina',
+        store: 'Armazém Mais',
+        quote: 'Fazer parte da Rede CenterSIM é um marco na história da nossa empresa. É motivo de orgulho e responsabilidade. Agradeço pela confiança e pelas parcerias que fortalecem esse movimento. Seguimos juntos, construindo crescimento com propósito.',
+        location: 'Candeias - BA',
+        photo: '/depoimentos/ana-karina.jpeg'
     },
     {
-        quote: 'A Rede CenterSIM possui elevada relevância estratégica para o nosso negócio. Ao longo de quase 10 anos de parceria, foi construída uma relação sólida de cooperação e confiança mútua.',
-        location: 'São Paulo'
+        name: 'Ludgero Moreira',
+        store: 'LM Acabamentos',
+        quote: 'Ser CenterSIM é estar ativo e associativo no mercado matcon. É estar atualizado e buscar melhores e maiores oportunidades para se desenvolver e oferecer aos clientes sempre o melhor.',
+        location: 'Passa Quatro - MG',
+        photo: '/depoimentos/ludgero.jpeg'
     },
     {
-        quote: 'Para nós, a Rede CenterSIM tem sido de extrema importância, trazendo as melhores opções e informações do mercado. Com transparência, eficiência e agilidade.',
-        location: 'Santa Catarina'
+        name: 'Rubia',
+        store: 'Pedrisco',
+        quote: 'Em tempos de alta competitividade e grandes desafios a CenterSIM foi uma parceira importante para nossa empresa. Pois com o apoio da rede, juntamente com as trocas de experiências dos parceiros lojistas associados, unimos forças para buscar melhores oportunidades de crescimento.',
+        location: 'Ortigueira - PR',
+        photo: '/depoimentos/rubia.jpeg'
     },
     {
-        quote: 'Somos parceiros há 10 anos. Decisão extremamente assertiva que nos fortalece a cada dia. A Rede nos traz total confiança e relevante apoio para a nossa operação.',
-        location: 'Mato Grosso'
+        name: 'Kleyton',
+        store: 'Reformar Construções',
+        quote: 'A CenterSIM tem sido uma parceira fundamental na caminhada da ReforMAR. A confiança, o suporte e a proximidade no dia a dia nos dão segurança para crescer e tomar decisões com mais clareza.',
+        location: 'Iraquara - BA',
+        photo: '/depoimentos/kleyton.jpeg'
+    },
+    {
+        name: 'Luhara Rios',
+        store: 'Casa das Madeiras',
+        quote: 'A CenterSIM é uma parceira estratégica para nós da Casa das Madeiras. Nossa relação é constituída por confiança e apoio constante, o que impulsiona nosso crescimento.',
+        location: 'Mairi - BA',
+        photo: '/depoimentos/luhara.jpeg'
     }
 ]
 
 export default function SejaParceiro() {
     const [currentTestimonial, setCurrentTestimonial] = useState(0)
     const [formData, setFormData] = useState({
-        nome: '', email: '', telefone: '', empresa: '', cidade: '', mensagem: ''
+        nome: '', loja: '', email: '', telefone: '', cidade: '', interesse: '', mensagem: ''
     })
 
     const handleChange = (e) => {
@@ -71,14 +90,16 @@ export default function SejaParceiro() {
     const handleSubmit = (e) => {
         e.preventDefault()
         alert('Formulário enviado com sucesso! Entraremos em contato em breve.')
-        setFormData({ nome: '', email: '', telefone: '', empresa: '', cidade: '', mensagem: '' })
+        setFormData({ nome: '', loja: '', email: '', telefone: '', cidade: '', interesse: '', mensagem: '' })
     }
 
     return (
         <main>
             {/* Page Hero */}
-            <div className="page-hero">
-                <div className="container">
+            <div className="page-hero page-hero-with-bg">
+                <img className="page-hero-bg" src="/hero_2.png" alt="" aria-hidden="true" />
+                <div className="page-hero-overlay" />
+                <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                     <div className="breadcrumb">
                         <Link to="/">Home</Link>
                         <span>/</span>
@@ -126,17 +147,43 @@ export default function SejaParceiro() {
                                 <div className="benefit-icon">
                                     <i className={`fas ${b.icon}`} />
                                 </div>
-                                <div>
-                                    <h4>{b.title}</h4>
-                                    <p>{b.desc}</p>
-                                </div>
+                                <h4>{b.title}</h4>
+                                <p>{b.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Por que CenterSIM */}
+            {/* Visual Call to Action */}
+            <section className="section section-light">
+                <div className="container">
+                    <div className="side-by-side">
+                        <div className="side-content">
+                            <h2 style={{ fontSize: '2.5rem', lineHeight: 1.1 }}>Sua loja merece o suporte de uma gigante.</h2>
+                            <p style={{ fontSize: '1.2rem', color: 'var(--gray)', marginTop: '20px' }}>
+                                Unir-se à Center SIM significa ter acesso a condições comerciais que antes eram restritas a grandes redes nacionais. 
+                                <br /><br />
+                                <strong>Competitividade, consultoria e marketing:</strong> o tripé que sustenta o crescimento dos nossos mais de 100 parceiros ativos em todo o Brasil.
+                            </p>
+                            <div style={{ marginTop: '30px' }}>
+                                <div className="feature-check">
+                                    <i className="fas fa-check-circle" style={{ color: 'var(--primary)' }} />
+                                    <span>Tabelas de preços exclusivas</span>
+                                </div>
+                                <div className="feature-check">
+                                    <i className="fas fa-check-circle" style={{ color: 'var(--primary)' }} />
+                                    <span>Treinamentos para sua equipe</span>
+                                </div>
+                                <div className="feature-check">
+                                    <i className="fas fa-check-circle" style={{ color: 'var(--primary)' }} />
+                                    <span>Marca forte e reconhecida</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section className="section section-gray">
                 <div className="container">
                     <h2 className="section-title">Porque a CenterSIM é a melhor escolha</h2>
@@ -156,7 +203,7 @@ export default function SejaParceiro() {
             <section className="section section-orange cta-section">
                 <div className="container">
                     <h2>Junte-se a uma rede que cresce junto com você.</h2>
-                    <Link to="/contato" className="btn btn-white" style={{ marginTop: '10px' }}>Solicitar contato</Link>
+                    <a href="#formparceiro" className="btn btn-white" style={{ marginTop: '10px' }}>Quero ser parceiro</a>
                 </div>
             </section>
 
@@ -170,7 +217,14 @@ export default function SejaParceiro() {
                                 <div className="testimonial-card" key={i}>
                                     <div className="testimonial-inner">
                                         <p className="testimonial-quote">{t.quote}</p>
-                                        <p className="testimonial-location">{t.location}</p>
+                                        <div className="testimonial-author">
+                                            <img src={t.photo} alt={t.name} className="testimonial-author-photo" />
+                                            <div>
+                                                <strong className="testimonial-name">{t.name}</strong>
+                                                <span className="testimonial-store">{t.store}</span>
+                                                <span className="testimonial-location">{t.location}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -200,28 +254,38 @@ export default function SejaParceiro() {
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                                     <div className="form-group">
                                         <label htmlFor="nome">Nome completo *</label>
-                                        <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleChange} required />
+                                        <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleChange} required placeholder="Seu nome" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="loja">Loja *</label>
+                                        <input type="text" id="loja" name="loja" value={formData.loja} onChange={handleChange} required placeholder="Nome da sua loja" />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="cidade">Cidade / Estado *</label>
+                                        <input type="text" id="cidade" name="cidade" value={formData.cidade} onChange={handleChange} required placeholder="Cidade / UF" />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="email">E-mail *</label>
-                                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required placeholder="seu@email.com" />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="telefone">Telefone *</label>
-                                        <input type="tel" id="telefone" name="telefone" value={formData.telefone} onChange={handleChange} required />
+                                        <input type="tel" id="telefone" name="telefone" value={formData.telefone} onChange={handleChange} required placeholder="(00) 00000-0000" />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="empresa">Empresa</label>
-                                        <input type="text" id="empresa" name="empresa" value={formData.empresa} onChange={handleChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cidade">Cidade / Estado</label>
-                                        <input type="text" id="cidade" name="cidade" value={formData.cidade} onChange={handleChange} />
+                                        <label htmlFor="interesse">Interesse *</label>
+                                        <select id="interesse" name="interesse" value={formData.interesse} onChange={handleChange} required>
+                                            <option value="">Selecione...</option>
+                                            <option value="lojista">Quero ser lojista</option>
+                                            <option value="equipe">Quero fazer parte da equipe</option>
+                                            <option value="fornecedor">Quero ser fornecedor</option>
+                                            <option value="outros">Outros</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="form-group" style={{ marginTop: '10px' }}>
                                     <label htmlFor="mensagem">Mensagem</label>
-                                    <textarea id="mensagem" name="mensagem" value={formData.mensagem} onChange={handleChange} />
+                                    <textarea id="mensagem" name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Sua mensagem..." />
                                 </div>
                                 <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }}>
                                     Enviar solicitação
@@ -237,7 +301,7 @@ export default function SejaParceiro() {
                 <div className="container">
                     <h2>Pronto para ser parceiro?</h2>
                     <p>Fale com a gente e saiba como podemos fortalecer o seu negócio.</p>
-                    <Link to="/contato" className="btn btn-primary" style={{ marginTop: '10px' }}>Solicitar contato</Link>
+                    <a href="#formparceiro" className="btn btn-primary" style={{ marginTop: '10px' }}>Fale com a gente</a>
                 </div>
             </section>
         </main>
