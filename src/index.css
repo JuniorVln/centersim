@@ -2786,11 +2786,11 @@ h4 {
 /* ===== PAGE HERO WITH BACKGROUND IMAGE ===== */
 .page-hero-with-bg {
   position: relative;
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 140px 0 100px !important;
   margin-top: 0 !important;
   background: var(--dark);
@@ -2818,6 +2818,9 @@ h4 {
   width: 100%;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-hero-bg {
@@ -2827,15 +2830,15 @@ h4 {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.5;
-  filter: saturate(0.5) brightness(0.8);
+  opacity: 1;
+  filter: saturate(0.85) brightness(0.9);
 }
 
 .page-hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top right, rgba(247, 101, 16, 0.25), transparent),
-              linear-gradient(to bottom, rgba(28, 28, 28, 0.6), transparent 40%, var(--dark));
+  background: rgba(0, 0, 0, 0.55);
+  mix-blend-mode: multiply;
   z-index: 1;
 }
 
