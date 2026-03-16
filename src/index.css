@@ -2904,6 +2904,10 @@ h4 {
   align-items: center;
 }
 
+.partner-app-visual img {
+  border-radius: 16px;
+}
+
 .phone-device {
   position: relative;
 }
