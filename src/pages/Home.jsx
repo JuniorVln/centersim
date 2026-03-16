@@ -546,8 +546,8 @@ export default function Home() {
                                 {contactError && <p className="form-contact-error">{contactError}</p>}
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>Cidade / Estado *</label>
-                                        <input type="text" required placeholder="Cidade / UF" />
+                                        <label>Cidade / Estado</label>
+                                        <input type="text" placeholder="Cidade / UF" />
                                     </div>
                                     <div className="form-group">
                                         <label>Interesse *</label>
