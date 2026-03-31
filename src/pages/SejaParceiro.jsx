@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { sendContactEmail } from '../lib/emailjs'
 
 const benefits = [
     {
@@ -87,10 +88,33 @@ export default function SejaParceiro() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const [sending, setSending] = useState(false)
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        alert('Formulário enviado com sucesso! Entraremos em contato em breve.')
-        setFormData({ nome: '', loja: '', email: '', telefone: '', cidade: '', interesse: '', mensagem: '' })
+        setSending(true)
+        try {
+            await sendContactEmail({
+                from_name: formData.nome,
+                loja: formData.loja,
+                email: formData.email,
+                telefone: formData.telefone,
+                cidade: formData.cidade,
+                interesse: formData.interesse,
+                mensagem: formData.mensagem,
+                origem: 'Seja Parceiro',
+            })
+            setFormData({ nome: '', loja: '', email: '', telefone: '', cidade: '', interesse: '', mensagem: '' })
+            setTimeout(() => {
+                alert('Formulário enviado com sucesso! Entraremos em contato em breve.')
+            }, 100)
+        } catch (err) {
+            if (!err.message?.includes('Ativação')) {
+                alert('Erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.')
+            }
+        } finally {
+            setSending(false)
+        }
     }
 
     return (
@@ -162,7 +186,7 @@ export default function SejaParceiro() {
                         <div className="side-content">
                             <h2 style={{ fontSize: '2.5rem', lineHeight: 1.1 }}>Sua loja merece o suporte de uma gigante.</h2>
                             <p style={{ fontSize: '1.2rem', color: 'var(--gray)', marginTop: '20px' }}>
-                                Unir-se à Center SIM significa ter acesso a condições comerciais que antes eram restritas a grandes redes nacionais. 
+                                Unir-se à CenterSIM significa ter acesso a condições comerciais que antes eram restritas a grandes redes nacionais. 
                                 <br /><br />
                                 <strong>Competitividade, consultoria e marketing:</strong> o tripé que sustenta o crescimento dos nossos mais de 100 parceiros ativos em todo o Brasil.
                             </p>
@@ -287,8 +311,8 @@ export default function SejaParceiro() {
                                     <label htmlFor="mensagem">Mensagem</label>
                                     <textarea id="mensagem" name="mensagem" value={formData.mensagem} onChange={handleChange} placeholder="Sua mensagem..." />
                                 </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }}>
-                                    Enviar solicitação
+                                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }} disabled={sending}>
+                                    {sending ? 'Enviando...' : 'Enviar solicitação'}
                                 </button>
                             </form>
                         </div>

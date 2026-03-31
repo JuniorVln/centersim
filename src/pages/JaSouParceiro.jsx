@@ -9,7 +9,7 @@ const appFeatures = [
     {
         icon: 'fa-box-open',
         title: 'Gestão de Estoque',
-        desc: 'Consulte a disponibilidade de chips e produtos Center SIM instantaneamente para agilizar suas vendas.'
+        desc: 'Consulte a disponibilidade de chips e produtos CenterSIM instantaneamente para agilizar suas vendas.'
     },
     {
         icon: 'fa-shopping-cart',
@@ -19,7 +19,7 @@ const appFeatures = [
     {
         icon: 'fa-bullhorn',
         title: 'Campanhas Exclusivas',
-        desc: 'Tenha acesso em primeira mão às campanhas nacionais da Center SIM e materiais de PDV.'
+        desc: 'Tenha acesso em primeira mão às campanhas nacionais da CenterSIM e materiais de PDV.'
     },
     {
         icon: 'fa-user-check',

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { sendContactEmail } from '../lib/emailjs'
 
 const slides = [
     {
@@ -146,12 +147,50 @@ export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0)
     const [openFaq, setOpenFaq] = useState(null)
     const [activeQuemSomosTab, setActiveQuemSomosTab] = useState(0)
+    const [formNome, setFormNome] = useState('')
+    const [formLoja, setFormLoja] = useState('')
     const [formEmail, setFormEmail] = useState('')
     const [formTel, setFormTel] = useState('')
+    const [formCidade, setFormCidade] = useState('')
+    const [formInteresse, setFormInteresse] = useState('')
+    const [formMensagem, setFormMensagem] = useState('')
     const [contactError, setContactError] = useState('')
+    const [contactSending, setContactSending] = useState(false)
     const slideInterval = useRef(null)
     const supplierLogoCount = 30
     const supplierLogos = Array.from({ length: supplierLogoCount }, (_, i) => i + 1)
+    const supplierLinks = {
+        1: 'https://angelgres.com.br/',
+        2: 'https://www.carmelofior.com.br/home',
+        3: 'https://www.grupoceral.com.br/',
+        4: 'https://www.ceramfix.com.br/',
+        5: 'https://cerbras.com/',
+        6: 'https://www2.grupocristofoletti.com.br/',
+        7: 'https://elizabethrevestimentos.com.br/',
+        8: 'https://www.incenor.com.br/',
+        9: 'https://lef.com.br/',
+        10: 'https://www.pointer.com.br/',
+        11: 'https://www.vivaceramica.com.br/vivaceramica/',
+        12: 'https://cobrecom.com.br/',
+        13: 'https://www.fame.com.br/',
+        14: 'https://www.lorenzetti.com.br/',
+        15: 'https://www.margirius.com.br/',
+        16: 'https://megatron.com.br/',
+        17: 'https://www.sil.com.br/pt/home.aspx',
+        18: 'https://www.zagonel.com.br/',
+        19: 'https://www.aliancametalurgica.com.br/',
+        20: 'https://www.lojapado.com.br/',
+        21: 'https://www.assaabloy.com.br/pt/index',
+        22: 'https://www.crvportasejanelas.com.br/',
+        23: 'https://www.esquadromil.com.br/',
+        24: 'https://www.adere.com/pt',
+        25: 'https://www.alessi.ind.br/',
+        26: 'https://site.atlas.com.br/pt',
+        27: 'https://condor.ind.br/',
+        28: 'https://www.eucatex.com.br/',
+        29: 'https://www.iquine.com.br/',
+        30: 'https://www.luztol.com.br/',
+    }
 
     const buildSources = (base) => ({
         avif: `${base}.avif`,
@@ -230,14 +269,43 @@ export default function Home() {
     const handleTouchStart = () => { userInteractingRef.current = true }
     const handleTouchEnd = () => { setTimeout(() => { userInteractingRef.current = false }, 1000) }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (!formEmail && !formTel) {
             setContactError('Preencha pelo menos o e-mail ou o telefone.')
             return
         }
         setContactError('')
-        alert('Solicitação enviada com sucesso! Em breve nossa equipe entrará em contato.')
+        setContactSending(true)
+        try {
+            await sendContactEmail({
+                from_name: formNome,
+                loja: formLoja,
+                email: formEmail,
+                telefone: formTel,
+                cidade: formCidade,
+                interesse: formInteresse,
+                mensagem: formMensagem,
+                origem: 'Home - Seja um parceiro',
+            })
+            setFormNome('')
+            setFormLoja('')
+            setFormEmail('')
+            setFormTel('')
+            setFormCidade('')
+            setFormInteresse('')
+            setFormMensagem('')
+            
+            setTimeout(() => {
+                alert('Solicitação enviada com sucesso! Em breve nossa equipe entrará em contato.')
+            }, 100)
+        } catch (err) {
+            if (!err.message?.includes('Ativação')) {
+                alert('Erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.')
+            }
+        } finally {
+            setContactSending(false)
+        }
     }
 
     const quemSomosTabs = [
@@ -247,7 +315,7 @@ export default function Home() {
             imageBase: '/missao_photo',
             content: (
                 <div className="qs-content-inner">
-                    <p style={{ fontSize: '1.05rem', lineHeight: '1.6', opacity: '0.9' }}>Prestar serviços relevantes para os nossos Parceiros de negócios, que são os Lojistas e Fornecedores da nova rede, a Center SIM.</p>
+                    <p style={{ fontSize: '1.05rem', lineHeight: '1.6', opacity: '0.9' }}>Prestar serviços relevantes para os nossos Parceiros de negócios, que são os Lojistas e Fornecedores da nova rede, a CenterSIM.</p>
                 </div>
             )
         },
@@ -375,7 +443,7 @@ export default function Home() {
                         </div>
                         <div className="qs-header-right">
                             <p className="qs-desc">
-                                A Center SIM é a rede do Grupo SIM Negócios dedicada ao mercado da construção civil. Criada para atender lojistas de materiais de construção, a rede oferece negociações estratégicas, serviços especializados e soluções que impulsionam resultados reais.
+                                A CenterSIM é a rede do Grupo SIM Negócios dedicada ao mercado da construção civil. Criada para atender lojistas de materiais de construção, a rede oferece negociações estratégicas, serviços especializados e soluções que impulsionam resultados reais.
                             </p>
                         </div>
                     </div>
@@ -472,7 +540,12 @@ export default function Home() {
                     <div className="suppliers-track suppliers-track-static">
                         {[...supplierLogos, ...supplierLogos].map((num, idx) => {
                             const base = `/fornecedores/${num}`
-                            return (
+                            const href = supplierLinks[num]
+                            return href ? (
+                                <a key={`${num}-${idx}`} className="supplier-brand-box" href={href} target="_blank" rel="noopener noreferrer">
+                                    <img src={`${base}.png`} alt={`Fornecedor ${num}`} loading="lazy" decoding="async" draggable="false" />
+                                </a>
+                            ) : (
                                 <div key={`${num}-${idx}`} className="supplier-brand-box">
                                     <img src={`${base}.png`} alt={`Fornecedor ${num}`} loading="lazy" decoding="async" draggable="false" />
                                 </div>
@@ -526,11 +599,11 @@ export default function Home() {
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label>Nome completo *</label>
-                                        <input type="text" required placeholder="Seu nome" />
+                                        <input type="text" required placeholder="Seu nome" value={formNome} onChange={(e) => setFormNome(e.target.value)} />
                                     </div>
                                     <div className="form-group">
                                         <label>Loja *</label>
-                                        <input type="text" required placeholder="Sua loja" />
+                                        <input type="text" required placeholder="Sua loja" value={formLoja} onChange={(e) => setFormLoja(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -547,11 +620,11 @@ export default function Home() {
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label>Cidade / Estado</label>
-                                        <input type="text" placeholder="Cidade / UF" />
+                                        <input type="text" placeholder="Cidade / UF" value={formCidade} onChange={(e) => setFormCidade(e.target.value)} />
                                     </div>
                                     <div className="form-group">
                                         <label>Interesse *</label>
-                                        <select required>
+                                        <select required value={formInteresse} onChange={(e) => setFormInteresse(e.target.value)}>
                                             <option value="">Selecione...</option>
                                             <option value="lojista">Quero ser lojista</option>
                                             <option value="equipe">Quero fazer parte da equipe</option>
@@ -562,10 +635,12 @@ export default function Home() {
                                 </div>
                                 <div className="form-group">
                                     <label>Mensagem</label>
-                                    <textarea rows="2" placeholder="Sua mensagem..."></textarea>
+                                    <textarea rows="2" placeholder="Sua mensagem..." value={formMensagem} onChange={(e) => setFormMensagem(e.target.value)}></textarea>
                                 </div>
                                 <div className="form-footer">
-                                    <button type="submit" className="btn btn-green">Enviar solicitação</button>
+                                    <button type="submit" className="btn btn-green" disabled={contactSending}>
+                                        {contactSending ? 'Enviando...' : 'Enviar solicitação'}
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -594,7 +669,7 @@ export default function Home() {
                         <div className="marquee-visual-col marquee-hover-pause">
                             <div className="marquee-column column-up">
                                 <div className="marquee-inner">
-                                    {[...testimonials, ...testimonials].map((t, i) => (
+                                    {[...testimonials.slice(0, 3), ...testimonials.slice(0, 3)].map((t, i) => (
                                         <div className="testimonial-card-mini" key={i}>
                                             <div className="mini-quote">
                                                 <i className="fas fa-quote-left"></i>
@@ -619,7 +694,7 @@ export default function Home() {
                             </div>
                             <div className="marquee-column column-down">
                                 <div className="marquee-inner">
-                                    {[...testimonials, ...testimonials].reverse().map((t, i) => (
+                                    {[...testimonials.slice(3), ...testimonials.slice(3)].map((t, i) => (
                                         <div className="testimonial-card-mini" key={i}>
                                             <div className="mini-quote">
                                                 <i className="fas fa-quote-left"></i>

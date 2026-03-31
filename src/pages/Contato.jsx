@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { sendContactEmail } from '../lib/emailjs'
 
 const faqData = [
     {
@@ -42,10 +43,31 @@ export default function Contato() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const [sending, setSending] = useState(false)
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        alert('Mensagem enviada com sucesso! Retornaremos em breve.')
-        setFormData({ nome: '', email: '', telefone: '', empresa: '', mensagem: '' })
+        setSending(true)
+        try {
+            await sendContactEmail({
+                from_name: formData.nome,
+                email: formData.email,
+                telefone: formData.telefone,
+                loja: formData.empresa,
+                mensagem: formData.mensagem,
+                origem: 'Página de Contato',
+            })
+            setFormData({ nome: '', email: '', telefone: '', empresa: '', mensagem: '' })
+            setTimeout(() => {
+                alert('Mensagem enviada com sucesso! Retornaremos em breve.')
+            }, 100)
+        } catch (err) {
+            if (!err.message?.includes('Ativação')) {
+                alert('Erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.')
+            }
+        } finally {
+            setSending(false)
+        }
     }
 
     const toggleFaq = (i) => {
@@ -99,7 +121,9 @@ export default function Contato() {
                                     <label htmlFor="mensagem">Mensagem</label>
                                     <textarea id="mensagem" name="mensagem" value={formData.mensagem} onChange={handleChange} />
                                 </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Enviar mensagem</button>
+                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={sending}>
+                                    {sending ? 'Enviando...' : 'Enviar mensagem'}
+                                </button>
                             </form>
                         </div>
 
