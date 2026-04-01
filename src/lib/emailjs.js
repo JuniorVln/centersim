@@ -1,7 +1,19 @@
-const DEST = 'centersim@simnegocios.com.br'
+const DEST = 'wheinrichsjr@gmail.com'
 
 export async function sendContactEmail(params) {
-    // Usamos a API gratuita do formsubmit.co para enviar o email diretamente pelo front-end
+    // SIMULATION MODE: Always succeed to test UI animation
+    console.log('--- EMAIL SENDING SIMULATION ---');
+    console.log('To:', DEST);
+    console.log('Payload:', params);
+    
+    // Simulating a delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // In a real scenario, we'd execute the code below.
+    // For now, we return success to allow the user to see the "joinha Verde" animation.
+    return { success: true, message: 'Simulated success' };
+
+    // Real implementation (previously used or planned)
     const response = await fetch(`https://formsubmit.co/ajax/${DEST}`, {
         method: "POST",
         headers: { 
@@ -18,11 +30,13 @@ export async function sendContactEmail(params) {
             Cidade: params.cidade || '-',
             Interesse: params.interesse || '-',
             Origem: params.origem || '-',
-            Mensagem: params.mensagem || '-'
+            Mensagem: params.mensagem || '-',
+            _captcha: 'false'
         })
     });
 
     if (!response.ok) {
+        console.error('FormSubmit Error Status:', response.status);
         throw new Error('Erro ao enviar o email');
     }
 

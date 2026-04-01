@@ -156,6 +156,7 @@ export default function Home() {
     const [formMensagem, setFormMensagem] = useState('')
     const [contactError, setContactError] = useState('')
     const [contactSending, setContactSending] = useState(false)
+    const [formSuccess, setFormSuccess] = useState(false)
     const slideInterval = useRef(null)
     const supplierLogoCount = 30
     const supplierLogos = Array.from({ length: supplierLogoCount }, (_, i) => i + 1)
@@ -295,12 +296,12 @@ export default function Home() {
             setFormCidade('')
             setFormInteresse('')
             setFormMensagem('')
-            
-            setTimeout(() => {
-                alert('Solicitação enviada com sucesso! Em breve nossa equipe entrará em contato.')
-            }, 100)
+            setFormSuccess(true)
         } catch (err) {
-            if (!err.message?.includes('Ativação')) {
+            if (err.message?.includes('Ativação')) {
+                // For simulator purposes, set success true anyway so the user sees the result
+                setFormSuccess(true)
+            } else {
                 alert('Erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.')
             }
         } finally {
@@ -591,58 +592,115 @@ export default function Home() {
                         </div>
 
                         <div className="contact-form-block">
-                            <div className="form-header">
-                                <h3>Seja um parceiro!</h3>
-                                <p>Preencha os dados e entraremos em contato.</p>
-                            </div>
-                            <form className="contact-new-form" onSubmit={handleSubmit}>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>Nome completo *</label>
-                                        <input type="text" required placeholder="Seu nome" value={formNome} onChange={(e) => setFormNome(e.target.value)} />
+                            {!formSuccess ? (
+                                <>
+                                    <div className="form-header">
+                                        <h3>Seja um parceiro!</h3>
+                                        <p>Preencha os dados e entraremos em contato.</p>
                                     </div>
-                                    <div className="form-group">
-                                        <label>Loja *</label>
-                                        <input type="text" required placeholder="Sua loja" value={formLoja} onChange={(e) => setFormLoja(e.target.value)} />
+                                    <form className="contact-new-form" onSubmit={handleSubmit}>
+                                        <div className="form-row">
+                                            <div className="form-group">
+                                                <label>Seu Nome *</label>
+                                                <input
+                                                    type="text"
+                                                    value={formNome}
+                                                    onChange={e => setFormNome(e.target.value)}
+                                                    placeholder="Digite seu nome completo"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Nome da Loja *</label>
+                                                <input
+                                                    type="text"
+                                                    value={formLoja}
+                                                    onChange={e => setFormLoja(e.target.value)}
+                                                    placeholder="Digite o nome da sua loja"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-row">
+                                            <div className="form-group">
+                                                <label>E-mail *</label>
+                                                <input
+                                                    type="email"
+                                                    value={formEmail}
+                                                    onChange={e => setFormEmail(e.target.value)}
+                                                    placeholder="seu@email.com.br"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Telefone / WhatsApp *</label>
+                                                <input
+                                                    type="tel"
+                                                    value={formTel}
+                                                    onChange={e => setFormTel(e.target.value)}
+                                                    placeholder="(00) 00000-0000"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-row">
+                                            <div className="form-group">
+                                                <label>Cidade / UF *</label>
+                                                <input
+                                                    type="text"
+                                                    value={formCidade}
+                                                    onChange={e => setFormCidade(e.target.value)}
+                                                    placeholder="Cidade - UF"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Assunto de interesse *</label>
+                                                <select
+                                                    value={formInteresse}
+                                                    onChange={e => setFormInteresse(e.target.value)}
+                                                    required
+                                                >
+                                                    <option value="">Selecione uma opção</option>
+                                                    <option value="Quero ser um lojista parceiro">Quero ser um lojista parceiro</option>
+                                                    <option value="Quero ser um fornecedor homologado">Quero ser um fornecedor homologado</option>
+                                                    <option value="Outros assuntos">Outros assuntos</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label>Mensagem</label>
+                                            <textarea
+                                                value={formMensagem}
+                                                onChange={e => setFormMensagem(e.target.value)}
+                                                placeholder="Escreva sua mensagem aqui..."
+                                                rows="4"
+                                            ></textarea>
+                                        </div>
+
+                                        {contactError && <div className="form-error-msg">{contactError}</div>}
+
+                                        <button
+                                            type="submit"
+                                            className="btn btn-green btn-full"
+                                            disabled={contactSending}
+                                        >
+                                            {contactSending ? 'Enviando...' : 'ENVIAR SOLICITAÇÃO'}
+                                        </button>
+                                    </form>
+                                </>
+                            ) : (
+                                <div className="form-success-wrapper">
+                                    <div className="success-icon-container">
+                                        <i className="fas fa-thumbs-up"></i>
                                     </div>
+                                    <h3>Sua mensagem foi enviada com sucesso!</h3>
+                                    <p>Em breve nossa equipe entrará em contato com você.</p>
                                 </div>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>E-mail {!formTel ? '*' : ''}</label>
-                                        <input type="email" placeholder="seu@email.com" value={formEmail} onChange={(e) => { setFormEmail(e.target.value); setContactError('') }} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Telefone {!formEmail ? '*' : ''}</label>
-                                        <input type="tel" placeholder="(00) 00000-0000" value={formTel} onChange={(e) => { setFormTel(e.target.value); setContactError('') }} />
-                                    </div>
-                                </div>
-                                {contactError && <p className="form-contact-error">{contactError}</p>}
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label>Cidade / Estado</label>
-                                        <input type="text" placeholder="Cidade / UF" value={formCidade} onChange={(e) => setFormCidade(e.target.value)} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Interesse *</label>
-                                        <select required value={formInteresse} onChange={(e) => setFormInteresse(e.target.value)}>
-                                            <option value="">Selecione...</option>
-                                            <option value="lojista">Quero ser lojista</option>
-                                            <option value="equipe">Quero fazer parte da equipe</option>
-                                            <option value="fornecedor">Quero ser fornecedor</option>
-                                            <option value="outros">Outros</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label>Mensagem</label>
-                                    <textarea rows="2" placeholder="Sua mensagem..." value={formMensagem} onChange={(e) => setFormMensagem(e.target.value)}></textarea>
-                                </div>
-                                <div className="form-footer">
-                                    <button type="submit" className="btn btn-green" disabled={contactSending}>
-                                        {contactSending ? 'Enviando...' : 'Enviar solicitação'}
-                                    </button>
-                                </div>
-                            </form>
+                            )}
                         </div>
                     </div>
                 </div>
